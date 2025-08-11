@@ -5,8 +5,183 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Table Checklist</title>
     <style>
-        /* (your CSS is unchanged) */
-        /* ... all your original styles here ... */
+        body {
+            background: #f4f5fa;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 5px 32px rgba(0,0,0,0.08);
+            padding: 32px 36px 36px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.1em;
+            color: #245ed8;
+        }
+        .header p {
+            color: #444;
+            font-size: 1.15em;
+            margin-top: 10px;
+        }
+        .table-container {
+            margin-top: 16px;
+        }
+        .add-item-section {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+            align-items: center;
+        }
+        .add-item-input {
+            flex: 1;
+            padding: 9px 15px;
+            border-radius: 6px;
+            border: 1px solid #cdd3e3;
+            font-size: 1em;
+        }
+        .add-btn {
+            background: #245ed8;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.18s;
+        }
+        .add-btn:hover {
+            background: #1745a2;
+        }
+        .progress-bar {
+            height: 17px;
+            background: #e6e9f4;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            width: 100%;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #245ed8 60%, #49d3e8);
+            border-radius: 8px;
+            width: 0;
+            transition: width 0.3s;
+        }
+        .progress-text {
+            text-align: right;
+            color: #666;
+            font-size: 0.96em;
+            margin-bottom: 7px;
+        }
+        .checklist-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(36,94,216,0.03);
+        }
+        .checklist-table th, .checklist-table td {
+            padding: 11px 13px;
+            text-align: left;
+        }
+        .checklist-table th {
+            background: #f7f9fd;
+            color: #245ed8;
+            font-weight: 600;
+            border-bottom: 1.5px solid #e4e9f4;
+        }
+        .checklist-table tr {
+            transition: background 0.16s;
+        }
+        .checklist-table tr.completed {
+            background: #eaf6e8;
+        }
+        .checkbox {
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            border: 2px solid #cdd3e3;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: border 0.16s, background 0.16s;
+        }
+        .checkbox.checked {
+            background: #49d3e8;
+            border-color: #245ed8;
+        }
+        .checkbox.checked::after {
+            content: '✔';
+            color: #fff;
+            font-size: 1.2em;
+        }
+        .task-text {
+            min-width: 110px;
+            padding: 4px 7px;
+            border-radius: 4px;
+            outline: none;
+            background: #f2f4fa;
+            font-size: 1em;
+            transition: background 0.11s;
+        }
+        .task-text:focus {
+            background: #e6e9f4;
+        }
+        .name-input {
+            width: 120px;
+            padding: 6px 9px;
+            border-radius: 5px;
+            border: 1px solid #d4d8e6;
+            font-size: 1em;
+        }
+        .comment-textarea {
+            width: 96%;
+            min-height: 35px;
+            border-radius: 5px;
+            border: 1px solid #d4d8e6;
+            padding: 6px 8px;
+            font-size: 0.99em;
+            resize: vertical;
+        }
+        .delete-btn {
+            background: #f15c5c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 6px 13px;
+            font-size: 1.08em;
+            cursor: pointer;
+            transition: background 0.18s;
+        }
+        .delete-btn:hover {
+            background: #c0392b;
+        }
+        @media (max-width: 650px) {
+            .container {
+                padding: 18px 6px;
+            }
+            .checklist-table th, .checklist-table td {
+                padding: 9px 7px;
+            }
+            .add-item-section {
+                flex-direction: column;
+                gap: 6px;
+            }
+        }
     </style>
 </head>
 <body>
